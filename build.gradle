@@ -1,7 +1,28 @@
 subprojects {
     apply plugin: "java"
+    apply plugin: "groovy"
 
     repositories {
         jcenter()
+    }
+
+    dependencies {
+        testCompile "org.codehaus.groovy:groovy:2.4.6"
+        testCompile "org.spockframework:spock-core:1.0-groovy-2.4"
+    }
+
+    test {
+        forkEvery = 1
+        maxParallelForks = Runtime.getRuntime().availableProcessors();
+
+        testLogging {
+            exceptionFormat = 'full'
+            showStandardStreams = true
+        }
+
+        beforeTest { descriptor ->
+            def classPadded = String.format("%-50s", descriptor.className)
+            logger.lifecycle("Running test ${classPadded} ${descriptor.name}()")
+        }
     }
 }
