@@ -1,6 +1,7 @@
 package io.sushisquad.mangacrawler2.lib;
 
-import java.io.OutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 /**
@@ -25,7 +26,7 @@ public interface Series {
     /**
      * @return a stream of image data for the preview image for this Series
      */
-    OutputStream getImageData();
+    InputStream getImageData() throws IOException;
 
     /**
      * @return the list of chapters for this series
